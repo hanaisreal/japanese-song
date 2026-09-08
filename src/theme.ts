@@ -7,6 +7,8 @@ export interface Theme {
   name: string;
   emoji: string;
   effect: EffectType;
+  /** false면 설정 패널에 노출하지 않음(일단 비활성화, 코드는 남겨둠) */
+  enabled?: boolean;
   colors: {
     bg: string;
     bgPanel: string;
@@ -23,7 +25,7 @@ export interface Theme {
   };
 }
 
-export const THEMES: Theme[] = [
+const ALL_THEMES: Theme[] = [
   {
     id: 'default',
     name: '기본 (크림)',
@@ -48,7 +50,7 @@ export const THEMES: Theme[] = [
     id: 'red-lime',
     name: '레드 & 연두',
     emoji: '🍋',
-    effect: 'leaves',
+    effect: 'none',
     colors: {
       bg: '#fffaf3',
       bgPanel: '#e9f7c5',
@@ -109,6 +111,7 @@ export const THEMES: Theme[] = [
     name: '라벤더 캔디',
     emoji: '💜',
     effect: 'hearts',
+    enabled: false,
     colors: {
       bg: '#faf6ff',
       bgPanel: '#f1e8ff',
@@ -126,6 +129,9 @@ export const THEMES: Theme[] = [
   },
 ];
 
+/** 설정 패널에 노출되는 테마 목록 — enabled: false인 테마는 숨김 */
+export const THEMES: Theme[] = ALL_THEMES.filter((t) => t.enabled !== false);
+
 const STORAGE_KEY = 'themeId';
 
 function loadThemeId(): string {
@@ -137,7 +143,7 @@ function loadThemeId(): string {
 }
 
 export function getTheme(id: string): Theme {
-  return THEMES.find((t) => t.id === id) ?? THEMES[0];
+  return ALL_THEMES.find((t) => t.id === id && t.enabled !== false) ?? THEMES[0];
 }
 
 let themeId = loadThemeId();

@@ -7,6 +7,9 @@ import { findAndParseSongPage, parseSongPageUrl } from '../songPageFinder';
 import { parsedPageToSong } from '../importedSong';
 import Player, { type PlayerHandle } from '../components/Player';
 
+// 곡 검색/URL 가져오기 기능은 일단 화면에서 비활성화 — 다시 켜려면 true로 변경
+const SHOW_SONG_IMPORT = false;
+
 const hasKanji = (s: string) => /[一-龯㐀-䶿]/.test(s);
 
 const lineKey = (si: number, li: number) => `${si}-${li}`;
@@ -445,31 +448,35 @@ export default function SongsPage() {
   return (
     <div className="songs-layout">
       <aside className="song-sidebar">
-        <div className="sidebar-label">노래 검색/가져오기</div>
-        <form
-          className="song-import-form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            void importSong();
-          }}
-        >
-          <input
-            className="search song-import-input"
-            value={songSearch}
-            onChange={(e) => setSongSearch(e.target.value)}
-            placeholder="곡명 또는 가사 URL"
-          />
-          <input
-            className="search song-import-input"
-            value={songArtist}
-            onChange={(e) => setSongArtist(e.target.value)}
-            placeholder="가수명(선택)"
-          />
-          <button className="btn song-import-btn" type="submit">
-            검색해서 파싱
-          </button>
-          {importStatus && <p className="import-status">{importStatus}</p>}
-        </form>
+        {SHOW_SONG_IMPORT && (
+          <>
+            <div className="sidebar-label">노래 검색/가져오기</div>
+            <form
+              className="song-import-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                void importSong();
+              }}
+            >
+              <input
+                className="search song-import-input"
+                value={songSearch}
+                onChange={(e) => setSongSearch(e.target.value)}
+                placeholder="곡명 또는 가사 URL"
+              />
+              <input
+                className="search song-import-input"
+                value={songArtist}
+                onChange={(e) => setSongArtist(e.target.value)}
+                placeholder="가수명(선택)"
+              />
+              <button className="btn song-import-btn" type="submit">
+                검색해서 파싱
+              </button>
+              {importStatus && <p className="import-status">{importStatus}</p>}
+            </form>
+          </>
+        )}
 
         <div className="sidebar-label">노래 목록</div>
         <nav className="song-list">
@@ -489,9 +496,6 @@ export default function SongsPage() {
             </button>
           ))}
         </nav>
-        <div className="sidebar-hint">
-          새 곡은 <code>src/data/</code>에 파일을 추가하면 됩니다
-        </div>
       </aside>
 
       <div className="songs-main">

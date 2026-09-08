@@ -449,17 +449,6 @@ body {
   color: var(--text-dim);
 }
 
-.sidebar-hint {
-  font-size: 11px;
-  color: var(--text-dim);
-  line-height: 1.6;
-  padding-left: 6px;
-}
-
-.sidebar-hint code {
-  color: var(--burgundy);
-}
-
 .songs-main {
   flex: 1;
   max-width: var(--content-max-width, 900px);
@@ -530,8 +519,8 @@ body {
 
 .line-card.now {
   border-color: transparent;
-  background: rgba(0, 160, 255, 0.06);
-  box-shadow: inset 3px 0 0 #00a4ff;
+  background: var(--burgundy-soft);
+  box-shadow: inset 3px 0 0 var(--burgundy);
   transform: none;
 }
 
@@ -551,7 +540,7 @@ body {
 .line-card.now .line-num,
 .line-card.now .caret-btn,
 .line-card.now ruby rt {
-  color: rgba(0, 123, 255, 0.75);
+  color: var(--burgundy);
 }
 
 .line-card.stamp-next {
@@ -679,8 +668,8 @@ body {
 
 /* ---------- legend ---------- */
 .legend {
-  --word-color: #4a6785;
-  --rest-color: #9a7b2f;
+  --word-color: var(--green);
+  --rest-color: var(--burgundy);
   display: flex;
   flex-wrap: wrap;
   gap: 8px 14px;
@@ -730,8 +719,8 @@ body {
 }
 
 .lyric-section {
-  --word-color: #4a6785;
-  --rest-color: #9a7b2f;
+  --word-color: var(--green);
+  --rest-color: var(--burgundy);
 }
 
 .section-name {
@@ -799,8 +788,8 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  border: 2px solid rgba(0, 143, 232, 0.16);
-  border-top-color: #008fe8;
+  border: 2px solid var(--burgundy-soft);
+  border-top-color: var(--burgundy);
   border-radius: 50%;
   animation: loading-spin 0.9s linear infinite;
 }
@@ -810,7 +799,7 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #008fe8;
+  background: var(--burgundy);
   opacity: 0.25;
   animation: loading-dot 1.05s ease-in-out infinite;
 }
@@ -904,7 +893,7 @@ body {
 
 .line-pronunciation {
   display: block;
-  color: #4a6785;
+  color: var(--green);
   font-size: clamp(15px, calc(2vw * var(--lyric-scale)), calc(23px * var(--lyric-scale)));
   line-height: 1.14;
   font-weight: 450;
@@ -914,7 +903,7 @@ body {
 
 .line-ko-preview {
   display: block;
-  color: #0084c7;
+  color: var(--burgundy);
   font-size: clamp(15px, calc(1.95vw * var(--lyric-scale)), calc(22px * var(--lyric-scale)));
   line-height: 1.14;
   font-weight: 450;
@@ -940,7 +929,7 @@ body {
   display: block;
   flex-basis: 100%;
   margin-top: 0.08em;
-  color: #008fe8;
+  color: var(--burgundy);
   font-size: 0.82em;
   opacity: 0.92;
 }
@@ -974,7 +963,7 @@ body {
 
 ruby rt {
   font-size: calc(13px * var(--lyric-scale));
-  color: #6c89a5;
+  color: var(--text-dim);
   font-family: var(--sans);
 }
 
@@ -1222,7 +1211,7 @@ ruby rt {
 }
 
 .kana-romaji {
-  color: #0077d9;
+  color: var(--burgundy);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.02em;

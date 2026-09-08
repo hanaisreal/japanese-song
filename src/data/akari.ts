@@ -6,7 +6,7 @@ export const akari: Song = {
   titleReading: "あかり",
   artist: "崎山蒼志 (Sakiyama Soushi)",
   youtubeId: "4jWzGkRsHw8",
-  about: "주술회전 2기(회옥·옥절) 엔딩 테마. 일본어 원문, 한국어식 발음, 한국어 번역을 줄별로 저장한 학습용 데이터입니다.",
+  about: "주술회전 2기(회옥·옥절) 엔딩 테마.",
   sections: [
     {
       name: "가사",

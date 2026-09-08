@@ -29,6 +29,7 @@ export const akari: Song = {
           jp: "君に全部告げるべきだった",
           reading: "키미니 젠부 츠게루베키닷타",
           ko: "너에게 전부 전했어야 했어",
+          start: 9.5,
           tokens: [
             { surface: "君", reading: "きみ", pos: "noun", meaning: "너" },
             { surface: "に", pos: "particle", meaning: "~에게" },
@@ -40,6 +41,7 @@ export const akari: Song = {
           jp: "夜が降りて解けての生活に",
           reading: "요루가 오리테 토케테노 세이카츠니",
           ko: "밤이 내려와 사라지는 생활에",
+          start: 17.1,
           tokens: [
             { surface: "夜", reading: "よる", pos: "noun", meaning: "밤" },
             { surface: "が", pos: "particle", meaning: "~이/가" },
@@ -53,6 +55,7 @@ export const akari: Song = {
           jp: "混濁した気持ち掠れる燈",
           reading: "콘다쿠시타 키모치 카스레루 아카리",
           ko: "혼탁한 마음과 스쳐가는 등불",
+          start: 24.8,
           tokens: [
             { surface: "混濁した", reading: "こんだくした", base: "混濁する", baseReading: "こんだくする", pos: "verb", meaning: "혼탁하다" },
             { surface: "気持ち", reading: "きもち", pos: "noun", meaning: "마음, 기분" },
@@ -64,6 +67,7 @@ export const akari: Song = {
           jp: "仕方がないと受け入れるのなら",
           reading: "시카타가 나이토 우케이레루노나라",
           ko: "어쩔 수 없다며 받아들일 거라면",
+          start: 32.3,
           tokens: [
             { surface: "仕方", reading: "しかた", pos: "noun", meaning: "방법, 수단", note: "仕方がない = 어쩔 수 없다" },
             { surface: "が", pos: "particle", meaning: "~이/가" },
@@ -77,6 +81,7 @@ export const akari: Song = {
           jp: "それまでだってわかっても",
           reading: "소레마데닷테 와캇테모",
           ko: "거기까지라고 알면서도",
+          start: 36.9,
           tokens: [
             { surface: "それ", reading: "それ", pos: "pronoun", meaning: "그것" },
             { surface: "まで", pos: "particle", meaning: "~까지" },
@@ -89,6 +94,7 @@ export const akari: Song = {
           jp: "なんだか割に合わないの、意義が",
           reading: "난다카 와리니 아와나이노 이기가",
           ko: "뭔가 딱 맞지 않아, 의의가",
+          start: 39.8,
           tokens: [
             { surface: "なんだか", reading: "なんだか", pos: "adverb", meaning: "왠지, 뭔가" },
             { surface: "割に合わない", reading: "わりにあわない", base: "割に合う", baseReading: "わりにあう", pos: "i-adj", meaning: "수지가 맞지 않다, 이치에 맞지 않다" },
@@ -102,6 +108,7 @@ export const akari: Song = {
           jp: "ないなんて",
           reading: "나이난테",
           ko: "없다니",
+          start: 44.5,
           tokens: [
             { surface: "ない", reading: "ない", pos: "i-adj", meaning: "없다" },
             { surface: "なんて", pos: "particle", meaning: "~라니" }
@@ -111,6 +118,7 @@ export const akari: Song = {
           jp: "何処にでもあるようなものが",
           reading: "도코니데모 아루요오나 모노가",
           ko: "어디에나 있을 법한 것이",
+          start: 46.8,
           tokens: [
             { surface: "何処", reading: "どこ", pos: "pronoun", meaning: "어디" },
             { surface: "に", pos: "particle", meaning: "~에" },
@@ -125,6 +133,7 @@ export const akari: Song = {
           jp: "ここにしかないことに気づく",
           reading: "코코니 시카 나이 코토니 키즈쿠",
           ko: "여기에만 있다는 걸 깨달아",
+          start: 51.3,
           tokens: [
             { surface: "ここ", reading: "ここ", pos: "pronoun", meaning: "여기" },
             { surface: "に", pos: "particle", meaning: "~에" },
@@ -139,6 +148,7 @@ export const akari: Song = {
           jp: "くだらない話でもよくて",
           reading: "쿠다라나이 하나시데모 요쿠테",
           ko: "별것 아닌 이야기여도 좋아",
+          start: 54.8,
           tokens: [
             { surface: "くだらない", reading: "くだらない", pos: "i-adj", meaning: "하찮다, 시시하다" },
             { surface: "話", reading: "はなし", pos: "noun", meaning: "이야기" },
@@ -151,6 +161,7 @@ export const akari: Song = {
           jp: "赤らめた顔また見せて",
           reading: "아카라메타 카오 마타 미세테",
           ko: "붉어진 얼굴을 다시 보여줘",
+          start: 58.8,
           tokens: [
             { surface: "赤らめた", reading: "あからめた", base: "赤らめる", baseReading: "あからめる", pos: "verb", meaning: "붉히다" },
             { surface: "顔", reading: "かお", pos: "noun", meaning: "얼굴" },
@@ -162,6 +173,7 @@ export const akari: Song = {
           jp: "故に月は暗い 頭flight",
           reading: "유에니 츠키와 쿠라이 아타마 flight",
           ko: "그래서 달은 어둡고 머리는 flight",
+          start: 63,
           tokens: [
             { surface: "故に", reading: "ゆえに", pos: "conjunction", meaning: "그러므로, 그래서" },
             { surface: "月", reading: "つき", pos: "noun", meaning: "달" },
@@ -176,6 +188,7 @@ export const akari: Song = {
           jp: "今日は櫂を持って",
           reading: "쿄오와 카이오 못테",
           ko: "오늘은 노를 들고서",
+          start: 65.6,
           tokens: [
             { surface: "今日", reading: "きょう", pos: "noun", meaning: "오늘" },
             { surface: "は", pos: "particle", meaning: "~은/는" },
@@ -188,6 +201,7 @@ export const akari: Song = {
           jp: "探し物がない 揺れる愛",
           reading: "사가시모노가 나이 유레루 아이",
           ko: "찾는 것이 없어 흔들리는 사랑",
+          start: 67.1,
           tokens: [
             { surface: "探し物", reading: "さがしもの", pos: "noun", meaning: "찾는 것, 찾고 있는 물건" },
             { surface: "が", pos: "particle", meaning: "~이/가" },
@@ -201,6 +215,7 @@ export const akari: Song = {
           jp: "隠し持って生きる",
           reading: "카쿠시 못테 이키루",
           ko: "남몰래 간직한 채 살아가",
+          start: 70.7,
           tokens: [
             { surface: "隠し持って", reading: "かくしもって", base: "隠し持つ", baseReading: "かくしもつ", pos: "verb", meaning: "몰래 지니다, 숨겨 가지다", note: "て형" },
             { surface: "生きる", reading: "いきる", pos: "verb", meaning: "살다" }
@@ -210,6 +225,7 @@ export const akari: Song = {
           jp: "故に月は暗い 頭flight",
           reading: "유에니 츠키와 쿠라이 아타마 flight",
           ko: "그래서 달은 어둡고 머리는 flight",
+          start: 71.8,
           tokens: [
             { surface: "故に", reading: "ゆえに", pos: "conjunction", meaning: "그러므로, 그래서" },
             { surface: "月", reading: "つき", pos: "noun", meaning: "달" },
@@ -224,6 +240,7 @@ export const akari: Song = {
           jp: "今日は何処も行けず",
           reading: "쿄오와 도코모 이케즈",
           ko: "오늘은 어디도 가지 못한 채",
+          start: 74,
           tokens: [
             { surface: "今日", reading: "きょう", pos: "noun", meaning: "오늘" },
             { surface: "は", pos: "particle", meaning: "~은/는" },
@@ -236,6 +253,7 @@ export const akari: Song = {
           jp: "眠る、眠る 新品の朝へ",
           reading: "네무루 네무루 신핀노 아사에",
           ko: "자고 또 자고 새로운 아침을 향해",
+          start: 75.4,
           tokens: [
             { surface: "眠る", reading: "ねむる", pos: "verb", meaning: "자다" },
             { surface: "、", pos: "expression", meaning: "문장부호" },
@@ -251,6 +269,7 @@ export const akari: Song = {
           jp: "孤独 under crying",
           reading: "코도쿠 under crying",
           ko: "고독 under crying",
+          start: 78.3,
           tokens: [
             { surface: "孤独", reading: "こどく", pos: "noun", meaning: "고독" },
             { surface: " ", pos: "expression", meaning: "공백" },
@@ -263,6 +282,7 @@ export const akari: Song = {
           jp: "めんどくさい 線引きのない",
           reading: "멘도쿠사이 센비키노 나이",
           ko: "귀찮은 선긋기 없는",
+          start: 79.8,
           tokens: [
             { surface: "めんどくさい", reading: "めんどくさい", pos: "i-adj", meaning: "귀찮다" },
             { surface: " ", pos: "expression", meaning: "공백" },
@@ -275,6 +295,7 @@ export const akari: Song = {
           jp: "記憶は儚い",
           reading: "키오쿠와 하카나이",
           ko: "기억은 덧없지",
+          start: 82,
           tokens: [
             { surface: "記憶", reading: "きおく", pos: "noun", meaning: "기억" },
             { surface: "は", pos: "particle", meaning: "~은/는" },
@@ -285,6 +306,7 @@ export const akari: Song = {
           jp: "昨日にまるで用はない",
           reading: "키노오니 마루데 요오와 나이",
           ko: "어제에는 전혀 관심 없고",
+          start: 83.5,
           tokens: [
             { surface: "昨日", reading: "きのう", pos: "noun", meaning: "어제" },
             { surface: "に", pos: "particle", meaning: "~에" },
@@ -298,6 +320,7 @@ export const akari: Song = {
           jp: "故に月は暗い 歪むLight",
           reading: "유에니 츠키와 쿠라이 유가무 Light",
           ko: "그래서 달은 어둡고 일그러진 Light",
+          start: 85.9,
           tokens: [
             { surface: "故に", reading: "ゆえに", pos: "conjunction", meaning: "그러므로, 그래서" },
             { surface: "月", reading: "つき", pos: "noun", meaning: "달" },
@@ -312,6 +335,7 @@ export const akari: Song = {
           jp: "明日は何処行こう",
           reading: "아스와 도코 유코오",
           ko: "내일은 어디로 갈까",
+          start: 88.3,
           tokens: [
             { surface: "明日", reading: "あす", pos: "noun", meaning: "내일" },
             { surface: "は", pos: "particle", meaning: "~은/는" },
@@ -323,6 +347,7 @@ export const akari: Song = {
           jp: "傷ついてる心がわかるのに",
           reading: "키즈츠이테루 코코로가 와카루노니",
           ko: "상처받은 마음을 알고 있는데도",
+          start: 93.1,
           tokens: [
             { surface: "傷ついてる", reading: "きずついてる", base: "傷つく", baseReading: "きずつく", pos: "verb", meaning: "상처받다", note: "傷ついている의 축약형" },
             { surface: "心", reading: "こころ", pos: "noun", meaning: "마음" },
@@ -335,6 +360,7 @@ export const akari: Song = {
           jp: "なぜ傷つけてしまうおんなじ跡",
           reading: "나제 키즈츠케테시마우 온나지 아토",
           ko: "왜 같은 자국을 남기며 상처 주고 마는 걸까",
+          start: 100.8,
           tokens: [
             { surface: "なぜ", reading: "なぜ", pos: "adverb", meaning: "왜" },
             { surface: "傷つけてしまう", reading: "きずつけてしまう", base: "傷つける", baseReading: "きずつける", pos: "verb", meaning: "상처 주고 말다" },
@@ -346,6 +372,7 @@ export const akari: Song = {
           jp: "エゴといって一括りにしていた",
           reading: "에고토 잇테 히토쿠쿠리니 시테이타",
           ko: "에고라고 말하며 하나로 묶어버렸어",
+          start: 108.1,
           tokens: [
             { surface: "エゴ", pos: "noun", meaning: "에고, 자아" },
             { surface: "と", pos: "particle", meaning: "~라고" },
@@ -359,6 +386,7 @@ export const akari: Song = {
           jp: "僕とあなたの本当 透明に燃えて",
           reading: "보쿠토 아나타노 혼토오 토오메이니 모에테",
           ko: "나와 당신의 진심은 투명하게 타올라",
+          start: 115.6,
           tokens: [
             { surface: "僕", reading: "ぼく", pos: "noun", meaning: "나" },
             { surface: "と", pos: "particle", meaning: "~와/과" },
@@ -375,6 +403,7 @@ export const akari: Song = {
           jp: "変わりたくって変わらない気持ち",
           reading: "카와리타쿳테 카와라나이 키모치",
           ko: "변하고 싶지만 변하지 않는 마음",
+          start: 123.7,
           tokens: [
             { surface: "変わりたくって", reading: "かわりたくって", base: "変わりたい", baseReading: "かわりたい", pos: "i-adj", meaning: "변하고 싶어서", note: "たくて의 구어체 촉음편" },
             { surface: "変わらない", reading: "かわらない", base: "変わる", baseReading: "かわる", pos: "verb", meaning: "변하지 않다" },
@@ -385,6 +414,7 @@ export const akari: Song = {
           jp: "形だけ崩れてく",
           reading: "카타치다케 쿠즈레테쿠",
           ko: "형태만 무너져 가",
+          start: 127.4,
           tokens: [
             { surface: "形", reading: "かたち", pos: "noun", meaning: "형태" },
             { surface: "だけ", pos: "particle", meaning: "~만" },
@@ -395,6 +425,7 @@ export const akari: Song = {
           jp: "希望の手 離さない 君の幽霊と",
           reading: "키보오노 테 하나사나이 키미노 유우레이토",
           ko: "희망의 손을 놓지 않아, 너의 유령과",
+          start: 131.4,
           tokens: [
             { surface: "希望", reading: "きぼう", pos: "noun", meaning: "희망" },
             { surface: "の", pos: "particle", meaning: "~의" },
@@ -412,6 +443,7 @@ export const akari: Song = {
           jp: "孤独から日々を数えたら",
           reading: "코도쿠카라 히비오 카조에타라",
           ko: "고독 속에서 하루하루를 세어보면",
+          start: 138.6,
           tokens: [
             { surface: "孤独", reading: "こどく", pos: "noun", meaning: "고독" },
             { surface: "から", pos: "particle", meaning: "~부터" },
@@ -424,6 +456,7 @@ export const akari: Song = {
           jp: "ひとつの涙に溺れてた",
           reading: "히토츠노 나미다니 오보레테타",
           ko: "한 방울 눈물에 빠져 있었어",
+          start: 142.2,
           tokens: [
             { surface: "ひとつ", reading: "ひとつ", pos: "noun", meaning: "하나" },
             { surface: "の", pos: "particle", meaning: "~의" },
@@ -436,6 +469,7 @@ export const akari: Song = {
           jp: "くだらないならいっそ壊して",
           reading: "쿠다라나이나라 잇소 코와시테",
           ko: "쓸데없다면 차라리 부숴버려",
+          start: 145.6,
           tokens: [
             { surface: "くだらないなら", reading: "くだらないなら", base: "くだらない", baseReading: "くだらない", pos: "i-adj", meaning: "하찮다면" },
             { surface: "いっそ", reading: "いっそ", pos: "adverb", meaning: "차라리" },
@@ -446,6 +480,7 @@ export const akari: Song = {
           jp: "歌の中で自由に生きるから",
           reading: "우타노 나카데 지유우니 이키루카라",
           ko: "노래 속에서 자유롭게 살아갈 테니까",
+          start: 149.3,
           tokens: [
             { surface: "歌", reading: "うた", pos: "noun", meaning: "노래" },
             { surface: "の", pos: "particle", meaning: "~의" },
@@ -461,6 +496,7 @@ export const akari: Song = {
           jp: "何処にでもあるようなものが",
           reading: "도코니데모 아루요오나 모노가",
           ko: "어디에나 있을 법한 것이",
+          start: 177.7,
           tokens: [
             { surface: "何処", reading: "どこ", pos: "pronoun", meaning: "어디" },
             { surface: "に", pos: "particle", meaning: "~에" },
@@ -475,6 +511,7 @@ export const akari: Song = {
           jp: "ここにしかないことに気づく",
           reading: "코코니 시카 나이 코토니 키즈쿠",
           ko: "여기에만 있다는 걸 깨달아",
+          start: 181.8,
           tokens: [
             { surface: "ここ", reading: "ここ", pos: "pronoun", meaning: "여기" },
             { surface: "に", pos: "particle", meaning: "~에" },
@@ -489,6 +526,7 @@ export const akari: Song = {
           jp: "くだらない静けさの夜また",
           reading: "쿠다라나이 시즈케사노 요루 마타",
           ko: "하찮은 고요의 밤에 또 다시",
+          start: 185.4,
           tokens: [
             { surface: "くだらない", reading: "くだらない", pos: "i-adj", meaning: "하찮다" },
             { surface: "静けさ", reading: "しずけさ", pos: "noun", meaning: "고요함" },
@@ -501,6 +539,7 @@ export const akari: Song = {
           jp: "記憶に住む僕だけ目覚める",
           reading: "키오쿠니 스무 보쿠다케 메자메루",
           ko: "기억 속에 사는 나만 눈을 떠",
+          start: 189.1,
           tokens: [
             { surface: "記憶", reading: "きおく", pos: "noun", meaning: "기억" },
             { surface: "に", pos: "particle", meaning: "~에" },
@@ -514,6 +553,7 @@ export const akari: Song = {
           jp: "ここにしかない",
           reading: "코코니 시카 나이",
           ko: "여기에만 있어",
+          start: 193.3,
           tokens: [
             { surface: "ここ", reading: "ここ", pos: "pronoun", meaning: "여기" },
             { surface: "に", pos: "particle", meaning: "~에" },
@@ -525,6 +565,7 @@ export const akari: Song = {
           jp: "君に触れたい",
           reading: "키미니 후레타이",
           ko: "너에게 닿고 싶어",
+          start: 196.9,
           tokens: [
             { surface: "君", reading: "きみ", pos: "noun", meaning: "너" },
             { surface: "に", pos: "particle", meaning: "~에게" },
@@ -535,6 +576,7 @@ export const akari: Song = {
           jp: "くだらない話でもよくて",
           reading: "쿠다라나이 하나시데모 요쿠테",
           ko: "별것 아닌 이야기여도 좋아",
+          start: 200.4,
           tokens: [
             { surface: "くだらない", reading: "くだらない", pos: "i-adj", meaning: "하찮다, 시시하다" },
             { surface: "話", reading: "はなし", pos: "noun", meaning: "이야기" },
@@ -547,6 +589,7 @@ export const akari: Song = {
           jp: "赤らめた顔また見せて",
           reading: "아카라메타 카오 마타 미세테",
           ko: "붉어진 얼굴을 다시 보여줘",
+          start: 204.4,
           tokens: [
             { surface: "赤らめた", reading: "あからめた", base: "赤らめる", baseReading: "あからめる", pos: "verb", meaning: "붉히다" },
             { surface: "顔", reading: "かお", pos: "noun", meaning: "얼굴" },
@@ -558,6 +601,7 @@ export const akari: Song = {
           jp: "孤独 under crying",
           reading: "코도쿠 under crying",
           ko: "고독 under crying (×4)",
+          start: 208.6,
           tokens: [
             { surface: "孤独", reading: "こどく", pos: "noun", meaning: "고독" },
             { surface: " ", pos: "expression", meaning: "공백" },
@@ -570,6 +614,7 @@ export const akari: Song = {
           jp: "孤独 under crying",
           reading: "코도쿠 under crying",
           ko: "고독 under crying",
+          start: 212.5,
           tokens: [
             { surface: "孤独", reading: "こどく", pos: "noun", meaning: "고독" },
             { surface: " ", pos: "expression", meaning: "공백" },
@@ -582,6 +627,7 @@ export const akari: Song = {
           jp: "めんどくさい 線引きのない",
           reading: "멘도쿠사이 센비키노 나이",
           ko: "귀찮은 선긋기 없는",
+          start: 225.4,
           tokens: [
             { surface: "めんどくさい", reading: "めんどくさい", pos: "i-adj", meaning: "귀찮다" },
             { surface: " ", pos: "expression", meaning: "공백" },
@@ -594,6 +640,7 @@ export const akari: Song = {
           jp: "記憶は儚い",
           reading: "키오쿠와 하카나이",
           ko: "기억은 덧없지",
+          start: 227.7,
           tokens: [
             { surface: "記憶", reading: "きおく", pos: "noun", meaning: "기억" },
             { surface: "は", pos: "particle", meaning: "~은/는" },
@@ -604,6 +651,7 @@ export const akari: Song = {
           jp: "昨日にまるで用はない",
           reading: "키노오니 마루데 요오와 나이",
           ko: "어제에는 전혀 관심 없고",
+          start: 229.2,
           tokens: [
             { surface: "昨日", reading: "きのう", pos: "noun", meaning: "어제" },
             { surface: "に", pos: "particle", meaning: "~에" },
@@ -617,6 +665,7 @@ export const akari: Song = {
           jp: "故に月は暗い 歪むLight",
           reading: "유에니 츠키와 쿠라이 유가무 Light",
           ko: "그래서 달은 어둡고 일그러진 Light",
+          start: 231.5,
           tokens: [
             { surface: "故に", reading: "ゆえに", pos: "conjunction", meaning: "그러므로, 그래서" },
             { surface: "月", reading: "つき", pos: "noun", meaning: "달" },
@@ -631,6 +680,7 @@ export const akari: Song = {
           jp: "明日は何処行こう",
           reading: "아스와 도코 유코오",
           ko: "내일은 어디로 갈까",
+          start: 234,
           tokens: [
             { surface: "明日", reading: "あす", pos: "noun", meaning: "내일" },
             { surface: "は", pos: "particle", meaning: "~은/는" },

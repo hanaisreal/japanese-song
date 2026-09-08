@@ -180,6 +180,18 @@ export const nightDancer: Song = {
           ]
         },
         {
+          jp: "どうでもいいような 夜だけど",
+          reading: "도오데모 이이요오나 요루다케도",
+          ko: "아무래도 좋을 것 같은 밤이지만",
+          tokens: [
+            { surface: "どうでもいい", reading: "どうでもいい", pos: "expression", meaning: "아무래도 좋다, 상관없다" },
+            { surface: "ような", pos: "expression", meaning: "~인 것 같은" },
+            { surface: " ", pos: "expression", meaning: "공백" },
+            { surface: "夜", reading: "よる", pos: "noun", meaning: "밤" },
+            { surface: "だけど", pos: "particle", meaning: "~지만" }
+          ]
+        },
+        {
           jp: "響めき 煌めきと君も “踊ろう”",
           reading: "도요메키 키라메키토 키미모 오도로오",
           ko: "웅성임과 반짝임 속에서 너도 춤추자",
@@ -194,6 +206,18 @@ export const nightDancer: Song = {
             { surface: "“", pos: "expression", meaning: "인용부호" },
             { surface: "踊ろう", reading: "おどろう", base: "踊る", baseReading: "おどる", pos: "verb", meaning: "춤추자", note: "의지형" },
             { surface: "”", pos: "expression", meaning: "인용부호" }
+          ]
+        },
+        {
+          jp: "どうでもいいような 夜だけど",
+          reading: "도오데모 이이요오나 요루다케도",
+          ko: "아무래도 좋을 것 같은 밤이지만",
+          tokens: [
+            { surface: "どうでもいい", reading: "どうでもいい", pos: "expression", meaning: "아무래도 좋다, 상관없다" },
+            { surface: "ような", pos: "expression", meaning: "~인 것 같은" },
+            { surface: " ", pos: "expression", meaning: "공백" },
+            { surface: "夜", reading: "よる", pos: "noun", meaning: "밤" },
+            { surface: "だけど", pos: "particle", meaning: "~지만" }
           ]
         },
         {
@@ -228,6 +252,16 @@ export const nightDancer: Song = {
             { surface: "無邪気な", reading: "むじゃきな", base: "無邪気だ", baseReading: "むじゃきだ", pos: "na-adj", meaning: "천진한, 순진한" },
             { surface: "顔", reading: "かお", pos: "noun", meaning: "얼굴" },
             { surface: "も", pos: "particle", meaning: "~도" }
+          ]
+        },
+        {
+          jp: "変わらないね 変わらないで",
+          reading: "카와라나이네 카와라나이데",
+          ko: "변하지 않네, 변하지 말아줘",
+          tokens: [
+            { surface: "変わらないね", reading: "かわらないね", base: "変わる", baseReading: "かわる", pos: "verb", meaning: "변하지 않네" },
+            { surface: " ", pos: "expression", meaning: "공백" },
+            { surface: "変わらないで", reading: "かわらないで", base: "変わる", baseReading: "かわる", pos: "verb", meaning: "변하지 말아줘", note: "부정형+で (~하지 말고)" }
           ]
         },
         {
@@ -300,6 +334,18 @@ export const nightDancer: Song = {
           ]
         },
         {
+          jp: "どうでもいいような 夜だけど",
+          reading: "도오데모 이이요오나 요루다케도",
+          ko: "아무래도 좋을 것 같은 밤이지만",
+          tokens: [
+            { surface: "どうでもいい", reading: "どうでもいい", pos: "expression", meaning: "아무래도 좋다, 상관없다" },
+            { surface: "ような", pos: "expression", meaning: "~인 것 같은" },
+            { surface: " ", pos: "expression", meaning: "공백" },
+            { surface: "夜", reading: "よる", pos: "noun", meaning: "밤" },
+            { surface: "だけど", pos: "particle", meaning: "~지만" }
+          ]
+        },
+        {
           jp: "ときめき 色めきと君も “踊ろう”",
           reading: "토키메키 이로메키토 키미모 오도로오",
           ko: "설렘과 들뜬 빛 속에서 너도 춤추자",
@@ -314,6 +360,27 @@ export const nightDancer: Song = {
             { surface: "“", pos: "expression", meaning: "인용부호" },
             { surface: "踊ろう", reading: "おどろう", base: "踊る", baseReading: "おどる", pos: "verb", meaning: "춤추자", note: "의지형" },
             { surface: "”", pos: "expression", meaning: "인용부호" }
+          ]
+        },
+        {
+          jp: "どうでもいいような 夜だけど",
+          reading: "도오데모 이이요오나 요루다케도",
+          ko: "아무래도 좋을 것 같은 밤이지만",
+          tokens: [
+            { surface: "どうでもいい", reading: "どうでもいい", pos: "expression", meaning: "아무래도 좋다, 상관없다" },
+            { surface: "ような", pos: "expression", meaning: "~인 것 같은" },
+            { surface: " ", pos: "expression", meaning: "공백" },
+            { surface: "夜", reading: "よる", pos: "noun", meaning: "밤" },
+            { surface: "だけど", pos: "particle", meaning: "~지만" }
+          ]
+        },
+        {
+          jp: "二人刻もう",
+          reading: "후타리 키자모오",
+          ko: "둘이서 새겨가자",
+          tokens: [
+            { surface: "二人", reading: "ふたり", pos: "noun", meaning: "두 사람, 둘이서" },
+            { surface: "刻もう", reading: "きざもう", base: "刻む", baseReading: "きざむ", pos: "verb", meaning: "새기자", note: "의지형" }
           ]
         },
         {
@@ -364,6 +431,18 @@ export const nightDancer: Song = {
           ]
         },
         {
+          jp: "どうでもいいような 夜だけど",
+          reading: "도오데모 이이요오나 요루다케도",
+          ko: "아무래도 좋을 것 같은 밤이지만",
+          tokens: [
+            { surface: "どうでもいい", reading: "どうでもいい", pos: "expression", meaning: "아무래도 좋다, 상관없다" },
+            { surface: "ような", pos: "expression", meaning: "~인 것 같은" },
+            { surface: " ", pos: "expression", meaning: "공백" },
+            { surface: "夜", reading: "よる", pos: "noun", meaning: "밤" },
+            { surface: "だけど", pos: "particle", meaning: "~지만" }
+          ]
+        },
+        {
           jp: "響めき 煌めきと君も ”踊ろう”",
           reading: "도요메키 키라메키토 키미모 오도로오",
           ko: "웅성임과 반짝임 속에서 너도 춤추자",
@@ -378,6 +457,18 @@ export const nightDancer: Song = {
             { surface: "”", pos: "expression", meaning: "인용부호" },
             { surface: "踊ろう", reading: "おどろう", base: "踊る", baseReading: "おどる", pos: "verb", meaning: "춤추자", note: "의지형" },
             { surface: "”", pos: "expression", meaning: "인용부호" }
+          ]
+        },
+        {
+          jp: "どうでもいいような 夜だけど",
+          reading: "도오데모 이이요오나 요루다케도",
+          ko: "아무래도 좋을 것 같은 밤이지만",
+          tokens: [
+            { surface: "どうでもいい", reading: "どうでもいい", pos: "expression", meaning: "아무래도 좋다, 상관없다" },
+            { surface: "ような", pos: "expression", meaning: "~인 것 같은" },
+            { surface: " ", pos: "expression", meaning: "공백" },
+            { surface: "夜", reading: "よる", pos: "noun", meaning: "밤" },
+            { surface: "だけど", pos: "particle", meaning: "~지만" }
           ]
         },
         {
@@ -413,6 +504,27 @@ export const nightDancer: Song = {
             { surface: "“", pos: "expression", meaning: "인용부호" },
             { surface: "踊ろう", reading: "おどろう", base: "踊る", baseReading: "おどる", pos: "verb", meaning: "춤추자", note: "의지형" },
             { surface: "”", pos: "expression", meaning: "인용부호" }
+          ]
+        },
+        {
+          jp: "どうでもいいような 夜だけど",
+          reading: "도오데모 이이요오나 요루다케도",
+          ko: "아무래도 좋을 것 같은 밤이지만",
+          tokens: [
+            { surface: "どうでもいい", reading: "どうでもいい", pos: "expression", meaning: "아무래도 좋다, 상관없다" },
+            { surface: "ような", pos: "expression", meaning: "~인 것 같은" },
+            { surface: " ", pos: "expression", meaning: "공백" },
+            { surface: "夜", reading: "よる", pos: "noun", meaning: "밤" },
+            { surface: "だけど", pos: "particle", meaning: "~지만" }
+          ]
+        },
+        {
+          jp: "二人刻もう",
+          reading: "후타리 키자모오",
+          ko: "둘이서 새겨가자",
+          tokens: [
+            { surface: "二人", reading: "ふたり", pos: "noun", meaning: "두 사람, 둘이서" },
+            { surface: "刻もう", reading: "きざもう", base: "刻む", baseReading: "きざむ", pos: "verb", meaning: "새기자", note: "의지형" }
           ]
         }
       ]

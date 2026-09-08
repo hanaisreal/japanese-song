@@ -7,10 +7,12 @@ import {
   updateSettings,
   useSettings,
 } from '../settings';
+import { THEMES, setThemeId, useThemeId } from '../theme';
 
 /** 헤더의 설정(⚙) 버튼 — 글자 크기·여백 너비를 전역으로 조절 */
 export default function SettingsPanel() {
   const settings = useSettings();
+  const themeId = useThemeId();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -35,6 +37,20 @@ export default function SettingsPanel() {
       </button>
       {open && (
         <div className="settings-popover">
+          <div className="settings-theme-row">
+            {THEMES.map((t) => (
+              <button
+                key={t.id}
+                className={`theme-swatch ${themeId === t.id ? 'active' : ''}`}
+                style={{ background: t.colors.bg, borderColor: t.colors.burgundy }}
+                onClick={() => setThemeId(t.id)}
+                title={t.name}
+              >
+                <span>{t.emoji}</span>
+                <small style={{ color: t.colors.text }}>{t.name}</small>
+              </button>
+            ))}
+          </div>
           <div className="settings-row">
             <label htmlFor="setting-font-scale">글자 크기</label>
             <input

@@ -207,6 +207,20 @@ export const akari: Song = {
           ]
         },
         {
+          jp: "故に月は暗い 頭flight",
+          reading: "유에니 츠키와 쿠라이 아타마 flight",
+          ko: "그래서 달은 어둡고 머리는 flight",
+          tokens: [
+            { surface: "故に", reading: "ゆえに", pos: "conjunction", meaning: "그러므로, 그래서" },
+            { surface: "月", reading: "つき", pos: "noun", meaning: "달" },
+            { surface: "は", pos: "particle", meaning: "~은/는" },
+            { surface: "暗い", reading: "くらい", pos: "i-adj", meaning: "어둡다" },
+            { surface: " ", pos: "expression", meaning: "공백" },
+            { surface: "頭", reading: "あたま", pos: "noun", meaning: "머리" },
+            { surface: "flight", pos: "noun", meaning: "비행, 도피 (영어 삽입어)" }
+          ]
+        },
+        {
           jp: "今日は何処も行けず",
           reading: "쿄오와 도코모 이케즈",
           ko: "오늘은 어디도 가지 못한 채",
@@ -444,6 +458,34 @@ export const akari: Song = {
           ]
         },
         {
+          jp: "何処にでもあるようなものが",
+          reading: "도코니데모 아루요오나 모노가",
+          ko: "어디에나 있을 법한 것이",
+          tokens: [
+            { surface: "何処", reading: "どこ", pos: "pronoun", meaning: "어디" },
+            { surface: "に", pos: "particle", meaning: "~에" },
+            { surface: "で", pos: "particle", meaning: "~에서" },
+            { surface: "も", pos: "particle", meaning: "~도" },
+            { surface: "あるような", reading: "あるような", base: "ある", baseReading: "ある", pos: "expression", meaning: "있을 법한, 있는 것 같은" },
+            { surface: "もの", pos: "noun", meaning: "것" },
+            { surface: "が", pos: "particle", meaning: "~이/가" }
+          ]
+        },
+        {
+          jp: "ここにしかないことに気づく",
+          reading: "코코니 시카 나이 코토니 키즈쿠",
+          ko: "여기에만 있다는 걸 깨달아",
+          tokens: [
+            { surface: "ここ", reading: "ここ", pos: "pronoun", meaning: "여기" },
+            { surface: "に", pos: "particle", meaning: "~에" },
+            { surface: "しか", pos: "particle", meaning: "~밖에" },
+            { surface: "ない", reading: "ない", pos: "i-adj", meaning: "없다" },
+            { surface: "こと", pos: "noun", meaning: "것" },
+            { surface: "に", pos: "particle", meaning: "~에" },
+            { surface: "気づく", reading: "きづく", pos: "verb", meaning: "깨닫다, 알아차리다" }
+          ]
+        },
+        {
           jp: "くだらない静けさの夜また",
           reading: "쿠다라나이 시즈케사노 요루 마타",
           ko: "하찮은 고요의 밤에 또 다시",
@@ -490,14 +532,110 @@ export const akari: Song = {
           ]
         },
         {
-          jp: "孤独under crying",
+          jp: "くだらない話でもよくて",
+          reading: "쿠다라나이 하나시데모 요쿠테",
+          ko: "별것 아닌 이야기여도 좋아",
+          tokens: [
+            { surface: "くだらない", reading: "くだらない", pos: "i-adj", meaning: "하찮다, 시시하다" },
+            { surface: "話", reading: "はなし", pos: "noun", meaning: "이야기" },
+            { surface: "で", pos: "particle", meaning: "~여도, ~라도" },
+            { surface: "も", pos: "particle", meaning: "~도" },
+            { surface: "よくて", reading: "よくて", base: "良い", baseReading: "よい", pos: "i-adj", meaning: "좋아서, 좋고", note: "て형" }
+          ]
+        },
+        {
+          jp: "赤らめた顔また見せて",
+          reading: "아카라메타 카오 마타 미세테",
+          ko: "붉어진 얼굴을 다시 보여줘",
+          tokens: [
+            { surface: "赤らめた", reading: "あからめた", base: "赤らめる", baseReading: "あからめる", pos: "verb", meaning: "붉히다" },
+            { surface: "顔", reading: "かお", pos: "noun", meaning: "얼굴" },
+            { surface: "また", reading: "また", pos: "adverb", meaning: "다시, 또" },
+            { surface: "見せて", reading: "みせて", base: "見せる", baseReading: "みせる", pos: "verb", meaning: "보여주다", note: "て형" }
+          ]
+        },
+        {
+          jp: "孤独 under crying",
+          reading: "코도쿠 under crying",
+          ko: "고독 under crying (×4)",
+          tokens: [
+            { surface: "孤独", reading: "こどく", pos: "noun", meaning: "고독" },
+            { surface: " ", pos: "expression", meaning: "공백" },
+            { surface: "under", pos: "expression", meaning: "~아래, ~밑에서 (영어 삽입어)" },
+            { surface: " ", pos: "expression", meaning: "공백" },
+            { surface: "crying", pos: "expression", meaning: "우는, 울음 (영어 삽입어)" }
+          ]
+        },
+        {
+          jp: "孤独 under crying",
           reading: "코도쿠 under crying",
           ko: "고독 under crying",
           tokens: [
             { surface: "孤独", reading: "こどく", pos: "noun", meaning: "고독" },
+            { surface: " ", pos: "expression", meaning: "공백" },
             { surface: "under", pos: "expression", meaning: "~아래, ~밑에서 (영어 삽입어)" },
             { surface: " ", pos: "expression", meaning: "공백" },
             { surface: "crying", pos: "expression", meaning: "우는, 울음 (영어 삽입어)" }
+          ]
+        },
+        {
+          jp: "めんどくさい 線引きのない",
+          reading: "멘도쿠사이 센비키노 나이",
+          ko: "귀찮은 선긋기 없는",
+          tokens: [
+            { surface: "めんどくさい", reading: "めんどくさい", pos: "i-adj", meaning: "귀찮다" },
+            { surface: " ", pos: "expression", meaning: "공백" },
+            { surface: "線引き", reading: "せんびき", pos: "noun", meaning: "선긋기, 구분" },
+            { surface: "の", pos: "particle", meaning: "~의" },
+            { surface: "ない", reading: "ない", pos: "i-adj", meaning: "없다" }
+          ]
+        },
+        {
+          jp: "記憶は儚い",
+          reading: "키오쿠와 하카나이",
+          ko: "기억은 덧없지",
+          tokens: [
+            { surface: "記憶", reading: "きおく", pos: "noun", meaning: "기억" },
+            { surface: "は", pos: "particle", meaning: "~은/는" },
+            { surface: "儚い", reading: "はかない", pos: "i-adj", meaning: "덧없다" }
+          ]
+        },
+        {
+          jp: "昨日にまるで用はない",
+          reading: "키노오니 마루데 요오와 나이",
+          ko: "어제에는 전혀 관심 없고",
+          tokens: [
+            { surface: "昨日", reading: "きのう", pos: "noun", meaning: "어제" },
+            { surface: "に", pos: "particle", meaning: "~에" },
+            { surface: "まるで", reading: "まるで", pos: "adverb", meaning: "전혀, 마치" },
+            { surface: "用", reading: "よう", pos: "noun", meaning: "용무, 볼일" },
+            { surface: "は", pos: "particle", meaning: "~은/는" },
+            { surface: "ない", reading: "ない", pos: "i-adj", meaning: "없다" }
+          ]
+        },
+        {
+          jp: "故に月は暗い 歪むLight",
+          reading: "유에니 츠키와 쿠라이 유가무 Light",
+          ko: "그래서 달은 어둡고 일그러진 Light",
+          tokens: [
+            { surface: "故に", reading: "ゆえに", pos: "conjunction", meaning: "그러므로, 그래서" },
+            { surface: "月", reading: "つき", pos: "noun", meaning: "달" },
+            { surface: "は", pos: "particle", meaning: "~은/는" },
+            { surface: "暗い", reading: "くらい", pos: "i-adj", meaning: "어둡다" },
+            { surface: " ", pos: "expression", meaning: "공백" },
+            { surface: "歪む", reading: "ゆがむ", pos: "verb", meaning: "일그러지다" },
+            { surface: "Light", pos: "noun", meaning: "빛 (영어 삽입어)" }
+          ]
+        },
+        {
+          jp: "明日は何処行こう",
+          reading: "아스와 도코 유코오",
+          ko: "내일은 어디로 갈까",
+          tokens: [
+            { surface: "明日", reading: "あす", pos: "noun", meaning: "내일" },
+            { surface: "は", pos: "particle", meaning: "~은/는" },
+            { surface: "何処", reading: "どこ", pos: "pronoun", meaning: "어디" },
+            { surface: "行こう", reading: "いこう", base: "行く", baseReading: "いく", pos: "verb", meaning: "가자", note: "의지형" }
           ]
         }
       ]

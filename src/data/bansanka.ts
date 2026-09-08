@@ -6,7 +6,7 @@ export const bansanka: Song = {
   titleReading: "ばんさんか",
   artist: "tuki.",
   about: "'너를 울릴 수밖에 없다는 것을 알면서도 곁에 두고 싶어하는' 모순된 사랑을 저녁 식사(만찬)에 비유한 노래입니다.",
-  youtubeId: "oZpYEEcvu5I",
+  youtubeId: "x46yKKXI7Ig",
   sections: [
     {
       name: "1절",

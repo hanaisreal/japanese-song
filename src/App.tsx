@@ -5,7 +5,7 @@ import GrammarPage from './pages/GrammarPage';
 import VocabPage from './pages/VocabPage';
 import SettingsPanel from './components/SettingsPanel';
 import ThemeEffect from './components/ThemeEffect';
-import { useSettings } from './settings';
+import { JP_FONTS, KO_FONTS, getFontCss, useSettings } from './settings';
 import { getTheme, useThemeId } from './theme';
 import './App.css';
 
@@ -25,8 +25,12 @@ export default function App() {
   const theme = getTheme(themeId);
 
   useEffect(() => {
-    document.documentElement.style.setProperty('--lyric-scale', String(settings.fontScale));
-    document.documentElement.style.setProperty('--content-max-width', `${settings.contentWidth}px`);
+    const root = document.documentElement.style;
+    root.setProperty('--lyric-scale-jp', String(settings.jpScale));
+    root.setProperty('--lyric-scale-ko', String(settings.koScale));
+    root.setProperty('--line-gap', `${settings.lineGap}px`);
+    root.setProperty('--font-jp', getFontCss(JP_FONTS, settings.jpFont));
+    root.setProperty('--font-ko', getFontCss(KO_FONTS, settings.koFont));
   }, [settings]);
 
   useEffect(() => {

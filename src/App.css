@@ -15,8 +15,9 @@
   --serif-jp: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif;
   --sans: 'Pretendard', 'Apple SD Gothic Neo', 'Hiragino Sans',
     'Noto Sans JP', 'Noto Sans KR', sans-serif;
-  --lyric-scale: 1;
-  --content-max-width: 900px;
+  --lyric-scale-jp: 1;
+  --lyric-scale-ko: 1;
+  --line-gap: 24px;
 }
 
 * {
@@ -131,14 +132,26 @@ body {
 }
 
 .settings-toggle {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   border: 1px solid var(--border);
   background: var(--bg-card);
   color: var(--text-dim);
-  font-size: 16px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-gear {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.5s cubic-bezier(0.34, 1.2, 0.4, 1), color 0.15s;
+}
+
+.settings-toggle:hover .settings-gear {
+  transform: rotate(50deg);
 }
 
 .settings-toggle:hover {
@@ -208,10 +221,26 @@ body {
   accent-color: var(--burgundy);
 }
 
+.settings-select {
+  grid-column: 2 / span 2;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 5px 8px;
+  font-size: 12px;
+  color: var(--text);
+  font-family: var(--sans);
+}
+
 .settings-value {
   text-align: right;
   color: var(--text-dim);
   font-variant-numeric: tabular-nums;
+}
+
+.settings-korean-toggle {
+  margin-top: 14px;
+  font-size: 13px;
 }
 
 /* ---------- layout ---------- */
@@ -221,7 +250,7 @@ body {
 }
 
 .page {
-  max-width: var(--content-max-width, 900px);
+  max-width: 900px;
   margin: 0 auto;
   padding: 32px 28px 80px;
 }
@@ -413,45 +442,82 @@ body {
 .song-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .song-item {
-  background: none;
-  border: 1px solid transparent;
-  border-radius: 10px;
-  padding: 10px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  padding: 8px;
   text-align: left;
   color: var(--text);
   cursor: pointer;
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  align-items: center;
+  gap: 10px;
   font-family: var(--sans);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
 }
 
 .song-item:hover {
-  background: var(--bg-card);
+  border-color: var(--green);
 }
 
 .song-item.active {
-  background: var(--bg-card);
+  background: var(--burgundy-soft);
   border-color: var(--burgundy);
+}
+
+.song-cover {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--bg-panel);
+}
+
+.song-cover-fallback {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  background: var(--bg-panel);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif-jp);
+  font-size: 20px;
+  color: var(--burgundy);
+}
+
+.song-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
 }
 
 .song-title {
   font-weight: 600;
   font-family: var(--serif-jp);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .song-artist {
   font-size: 12px;
   color: var(--text-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .songs-main {
   flex: 1;
-  max-width: var(--content-max-width, 900px);
+  max-width: 900px;
   margin: 0 auto;
   padding: 28px 28px 80px;
   min-width: 0;
@@ -520,7 +586,6 @@ body {
 .line-card.now {
   border-color: transparent;
   background: var(--burgundy-soft);
-  box-shadow: inset 3px 0 0 var(--burgundy);
   transform: none;
 }
 
@@ -839,7 +904,7 @@ body {
   background: transparent;
   border: 1px solid transparent;
   border-radius: 10px;
-  margin-bottom: calc(24px * var(--lyric-scale));
+  margin-bottom: var(--line-gap);
   overflow: hidden;
   transition: border-color 0.15s, transform 0.18s, opacity 0.18s, background 0.18s;
 }
@@ -879,36 +944,36 @@ body {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: calc(5px * var(--lyric-scale));
+  gap: calc(5px * var(--lyric-scale-jp));
 }
 
 .line-jp {
   display: block;
-  font-size: clamp(16px, calc(2.35vw * var(--lyric-scale)), calc(26px * var(--lyric-scale)));
+  font-size: clamp(16px, calc(2.35vw * var(--lyric-scale-jp)), calc(26px * var(--lyric-scale-jp)));
   line-height: 1.16;
   font-weight: 460;
-  font-family: var(--serif-jp);
+  font-family: var(--font-jp, var(--serif-jp));
   color: var(--text);
 }
 
 .line-pronunciation {
   display: block;
   color: var(--green);
-  font-size: clamp(15px, calc(2vw * var(--lyric-scale)), calc(23px * var(--lyric-scale)));
+  font-size: clamp(15px, calc(2vw * var(--lyric-scale-ko)), calc(23px * var(--lyric-scale-ko)));
   line-height: 1.14;
   font-weight: 450;
   letter-spacing: -0.055em;
-  font-family: var(--sans);
+  font-family: var(--font-ko, var(--sans));
 }
 
 .line-ko-preview {
   display: block;
   color: var(--burgundy);
-  font-size: clamp(15px, calc(1.95vw * var(--lyric-scale)), calc(22px * var(--lyric-scale)));
+  font-size: clamp(15px, calc(1.95vw * var(--lyric-scale-ko)), calc(22px * var(--lyric-scale-ko)));
   line-height: 1.14;
   font-weight: 450;
   letter-spacing: -0.055em;
-  font-family: var(--sans);
+  font-family: var(--font-ko, var(--sans));
 }
 
 .color-match-row {
@@ -962,7 +1027,7 @@ body {
 }
 
 ruby rt {
-  font-size: calc(13px * var(--lyric-scale));
+  font-size: calc(13px * var(--lyric-scale-jp));
   color: var(--text-dim);
   font-family: var(--sans);
 }

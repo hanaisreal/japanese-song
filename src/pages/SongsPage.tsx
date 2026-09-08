@@ -6,6 +6,7 @@ import { songSources, type SongSource } from '../data/songSources';
 import { findAndParseSongPage, parseSongPageUrl } from '../songPageFinder';
 import { parsedPageToSong } from '../importedSong';
 import Player, { type PlayerHandle } from '../components/Player';
+import { useSettings } from '../settings';
 
 // 곡 검색/URL 가져오기 기능은 일단 화면에서 비활성화 — 다시 켜려면 true로 변경
 const SHOW_SONG_IMPORT = false;
@@ -69,6 +70,8 @@ function LineCard({
   index,
   furigana,
   romaji,
+  showReading,
+  showTranslation,
   active,
   start,
   syncMode,
@@ -82,6 +85,8 @@ function LineCard({
   index: number;
   furigana: boolean;
   romaji: boolean;
+  showReading: boolean;
+  showTranslation: boolean;
   active: boolean;
   start?: number;
   syncMode: boolean;
@@ -117,8 +122,12 @@ function LineCard({
               <TokenRuby key={i} token={t} furigana={furigana} />
             ))}
           </span>
-          <span className="line-pronunciation">{line.reading ?? line.tokens.map((token) => token.reading ?? token.surface).join(' ')}</span>
-          <span className="line-ko-preview">{displayKo(line.ko)}</span>
+          {showReading && (
+            <span className="line-pronunciation">{line.reading ?? line.tokens.map((token) => token.reading ?? token.surface).join(' ')}</span>
+          )}
+          {showTranslation && (
+            <span className="line-ko-preview">{displayKo(line.ko)}</span>
+          )}
         </button>
         {syncMode && (
           <button className="stamp-btn" title="지금 이 줄 시작!" onClick={onStamp}>
@@ -192,6 +201,7 @@ export default function SongsPage() {
   const [songArtist, setSongArtist] = useState('');
   const [importStatus, setImportStatus] = useState<string>();
   const [lyricsLoading, setLyricsLoading] = useState(false);
+  const settings = useSettings();
 
   const playerRef = useRef<PlayerHandle>(null);
   const cardRefs = useRef(new Map<string, HTMLDivElement>());
@@ -491,8 +501,20 @@ export default function SongsPage() {
                 setTime(0);
               }}
             >
-              <span className="song-title">{s.title}</span>
-              <span className="song-artist">{s.artist}</span>
+              {s.youtubeId ? (
+                <img
+                  className="song-cover"
+                  src={`https://img.youtube.com/vi/${s.youtubeId}/mqdefault.jpg`}
+                  alt=""
+                  loading="lazy"
+                />
+              ) : (
+                <span className="song-cover-fallback">♪</span>
+              )}
+              <span className="song-item-text">
+                <span className="song-title">{s.title}</span>
+                <span className="song-artist">{s.artist}</span>
+              </span>
             </button>
           ))}
         </nav>
@@ -632,6 +654,8 @@ export default function SongsPage() {
                       index={li}
                       furigana={furigana}
                       romaji={romaji}
+                      showReading={settings.showReading}
+                      showTranslation={settings.showTranslation}
                       active={key === activeKey}
                       start={f?.start}
                       syncMode={syncMode}

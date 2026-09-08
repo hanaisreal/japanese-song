@@ -13,14 +13,22 @@ interface Particle {
   drift: number;
 }
 
-interface LeafShadow {
+interface Leaf {
   x: number;
   y: number;
   size: number;
   rot0: number;
+  jitterPhase: number;
+}
+
+interface Twig {
+  segments: { x1: number; y1: number; x2: number; y2: number }[];
+  leaves: Leaf[];
+  baseX: number;
+  baseY: number;
   swayAmp: number;
   swaySpeed: number;
-  phase: number;
+  swayPhase: number;
 }
 
 function rand(min: number, max: number) {
@@ -70,15 +78,52 @@ function makeHeart(w: number, h: number, atBottom: boolean): Particle {
   };
 }
 
-function makeLeafShadow(w: number, h: number): LeafShadow {
+/** 모서리에서 안쪽으로 뻗어나가는 나뭇가지 하나(작은 잔가지들 포함)와, 그 위에 달린 잎들을 생성 */
+function makeTwig(cornerX: number, cornerY: number, dirAngle: number, reach: number): Twig {
+  const segments: Twig['segments'] = [];
+  const leaves: Leaf[] = [];
+
+  const branch = (x: number, y: number, angle: number, len: number, depth: number) => {
+    const x2 = x + Math.cos(angle) * len;
+    const y2 = y + Math.sin(angle) * len;
+    segments.push({ x1: x, y1: y, x2, y2 });
+
+    // 가지 끝 쪽에 잎을 몇 개 붙인다 — 끝으로 갈수록 잎이 작아짐
+    const leafCount = depth === 0 ? 2 : Math.round(rand(1, 3));
+    for (let i = 0; i < leafCount; i++) {
+      const t = rand(0.4, 1);
+      const lx = x + (x2 - x) * t;
+      const ly = y + (y2 - y) * t;
+      const side = Math.random() < 0.5 ? 1 : -1;
+      const perpAngle = angle + (Math.PI / 2) * side;
+      const offset = rand(4, 14);
+      leaves.push({
+        x: lx + Math.cos(perpAngle) * offset,
+        y: ly + Math.sin(perpAngle) * offset,
+        size: rand(14, 26) * (1 - depth * 0.18),
+        rot0: angle + rand(-0.6, 0.6),
+        jitterPhase: rand(0, Math.PI * 2),
+      });
+    }
+
+    if (depth >= 3 || len < 14) return;
+    const children = depth === 0 ? 2 : Math.random() < 0.7 ? 1 : 0;
+    for (let i = 0; i < children; i++) {
+      const childAngle = angle + rand(-0.55, 0.55);
+      branch(x2, y2, childAngle, len * rand(0.6, 0.78), depth + 1);
+    }
+  };
+
+  branch(cornerX, cornerY, dirAngle, reach, 0);
+
   return {
-    x: rand(0, w),
-    y: rand(0, h),
-    size: rand(30, 70),
-    rot0: rand(0, Math.PI * 2),
-    swayAmp: rand(0.08, 0.22),
-    swaySpeed: rand(0.3, 0.7),
-    phase: rand(0, Math.PI * 2),
+    segments,
+    leaves,
+    baseX: cornerX,
+    baseY: cornerY,
+    swayAmp: rand(0.02, 0.045),
+    swaySpeed: rand(0.25, 0.4),
+    swayPhase: rand(0, Math.PI * 2),
   };
 }
 
@@ -120,17 +165,39 @@ function drawHeart(ctx: CanvasRenderingContext2D, p: Particle, color: string) {
   ctx.restore();
 }
 
-function drawLeafShadow(ctx: CanvasRenderingContext2D, l: LeafShadow, rot: number) {
+function drawLeaf(ctx: CanvasRenderingContext2D, l: Leaf, rot: number) {
   ctx.save();
   ctx.translate(l.x, l.y);
   ctx.rotate(rot);
-  ctx.fillStyle = 'rgba(40, 55, 15, 0.10)';
+  ctx.fillStyle = 'rgba(35, 48, 15, 0.5)';
   const s = l.size;
   ctx.beginPath();
-  ctx.moveTo(0, -s * 0.5);
-  ctx.bezierCurveTo(s * 0.55, -s * 0.35, s * 0.55, s * 0.35, 0, s * 0.5);
-  ctx.bezierCurveTo(-s * 0.55, s * 0.35, -s * 0.55, -s * 0.35, 0, -s * 0.5);
+  ctx.moveTo(0, -s * 0.62);
+  ctx.quadraticCurveTo(s * 0.4, -s * 0.2, 0, s * 0.62);
+  ctx.quadraticCurveTo(-s * 0.4, -s * 0.2, 0, -s * 0.62);
   ctx.fill();
+  ctx.restore();
+}
+
+function drawTwig(ctx: CanvasRenderingContext2D, twig: Twig, sway: number) {
+  ctx.save();
+  ctx.translate(twig.baseX, twig.baseY);
+  ctx.rotate(sway);
+  ctx.translate(-twig.baseX, -twig.baseY);
+
+  ctx.strokeStyle = 'rgba(35, 48, 15, 0.45)';
+  ctx.lineWidth = 1.6;
+  ctx.lineCap = 'round';
+  for (const seg of twig.segments) {
+    ctx.beginPath();
+    ctx.moveTo(seg.x1, seg.y1);
+    ctx.lineTo(seg.x2, seg.y2);
+    ctx.stroke();
+  }
+  for (const leaf of twig.leaves) {
+    const jitter = Math.sin(sway * 3 + leaf.jitterPhase) * 0.12;
+    drawLeaf(ctx, leaf, leaf.rot0 + jitter);
+  }
   ctx.restore();
 }
 
@@ -190,16 +257,21 @@ function runLeavesEffect(
   reduced: boolean,
 ) {
   const { w: w0, h: h0 } = getSize();
-  const count = Math.round(Math.min(22, Math.max(10, (w0 * h0) / 32000)));
-  const leaves: LeafShadow[] = Array.from({ length: count }).map(() => makeLeafShadow(w0, h0));
+  // 화면 모서리 두어 곳에서 안쪽으로 뻗어나가는 나뭇가지 다발 — 창밖 나무 그림자 느낌
+  const twigs: Twig[] = [
+    makeTwig(w0 * 0.02, -h0 * 0.02, Math.PI * 0.22, Math.min(w0, h0) * 0.42),
+    makeTwig(w0 * 0.06, -h0 * 0.02, Math.PI * 0.32, Math.min(w0, h0) * 0.3),
+    makeTwig(w0 * 1.0, h0 * 1.02, -Math.PI * 0.78, Math.min(w0, h0) * 0.4),
+    makeTwig(w0 * 0.96, h0 * 1.04, -Math.PI * 0.65, Math.min(w0, h0) * 0.26),
+  ];
 
   const paint = (t: number) => {
     const { w, h } = getSize();
     ctx.clearRect(0, 0, w, h);
-    ctx.filter = 'blur(4px)';
-    for (const l of leaves) {
-      const rot = l.rot0 + Math.sin(t * l.swaySpeed + l.phase) * l.swayAmp;
-      drawLeafShadow(ctx, l, rot);
+    ctx.filter = 'blur(2.5px)';
+    for (const twig of twigs) {
+      const sway = Math.sin(t * twig.swaySpeed + twig.swayPhase) * twig.swayAmp;
+      drawTwig(ctx, twig, sway);
     }
     ctx.filter = 'none';
   };

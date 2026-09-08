@@ -129,6 +129,7 @@ body {
 /* ---------- settings popover ---------- */
 .settings-panel {
   position: relative;
+  margin-left: auto;
 }
 
 .settings-toggle {
@@ -1373,7 +1374,10 @@ ruby rt {
     padding: 18px 16px 64px;
   }
 
-  .line-ko-preview {
-    font-size: 28px;
+  .settings-popover {
+    width: min(280px, calc(100vw - 24px));
+    right: -8px;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
   }
 }

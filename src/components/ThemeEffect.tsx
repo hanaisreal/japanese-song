@@ -13,13 +13,14 @@ interface Particle {
   drift: number;
 }
 
-interface Node {
+interface LeafShadow {
   x: number;
   y: number;
-  vx: number;
-  vy: number;
-  r: number;
-  hue: 'pink' | 'cyan';
+  size: number;
+  rot0: number;
+  swayAmp: number;
+  swaySpeed: number;
+  phase: number;
 }
 
 function rand(min: number, max: number) {
@@ -55,14 +56,29 @@ function makeSnow(w: number, h: number, atTop: boolean): Particle {
   };
 }
 
-function makeNode(w: number, h: number): Node {
+function makeHeart(w: number, h: number, atBottom: boolean): Particle {
+  return {
+    x: rand(-10, w + 10),
+    y: atBottom ? rand(h + 5, h + 40) : rand(-10, h),
+    size: rand(6, 12),
+    rot: rand(-0.3, 0.3),
+    vr: rand(-0.6, 0.6),
+    sway: rand(12, 26),
+    phase: rand(0, Math.PI * 2),
+    speed: rand(14, 26),
+    drift: rand(0.6, 1.1),
+  };
+}
+
+function makeLeafShadow(w: number, h: number): LeafShadow {
   return {
     x: rand(0, w),
     y: rand(0, h),
-    vx: rand(-10, 10),
-    vy: rand(-10, 10),
-    r: rand(1.4, 3),
-    hue: Math.random() < 0.5 ? 'pink' : 'cyan',
+    size: rand(30, 70),
+    rot0: rand(0, Math.PI * 2),
+    swayAmp: rand(0.08, 0.22),
+    swaySpeed: rand(0.3, 0.7),
+    phase: rand(0, Math.PI * 2),
   };
 }
 
@@ -89,21 +105,48 @@ function drawFlake(ctx: CanvasRenderingContext2D, p: Particle) {
   ctx.fill();
 }
 
-const CYBER_PINK = '255, 62, 200';
-const CYBER_CYAN = '46, 230, 230';
+function drawHeart(ctx: CanvasRenderingContext2D, p: Particle, color: string) {
+  ctx.save();
+  ctx.translate(p.x, p.y);
+  ctx.rotate(p.rot);
+  ctx.fillStyle = color;
+  ctx.globalAlpha = 0.75;
+  const s = p.size;
+  ctx.beginPath();
+  ctx.moveTo(0, s * 0.35);
+  ctx.bezierCurveTo(-s, -s * 0.5, -s * 0.4, -s * 1.1, 0, -s * 0.35);
+  ctx.bezierCurveTo(s * 0.4, -s * 1.1, s, -s * 0.5, 0, s * 0.35);
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawLeafShadow(ctx: CanvasRenderingContext2D, l: LeafShadow, rot: number) {
+  ctx.save();
+  ctx.translate(l.x, l.y);
+  ctx.rotate(rot);
+  ctx.fillStyle = 'rgba(40, 55, 15, 0.10)';
+  const s = l.size;
+  ctx.beginPath();
+  ctx.moveTo(0, -s * 0.5);
+  ctx.bezierCurveTo(s * 0.55, -s * 0.35, s * 0.55, s * 0.35, 0, s * 0.5);
+  ctx.bezierCurveTo(-s * 0.55, s * 0.35, -s * 0.55, -s * 0.35, 0, -s * 0.5);
+  ctx.fill();
+  ctx.restore();
+}
 
 function runParticleEffect(
   ctx: CanvasRenderingContext2D,
-  type: 'sakura' | 'snow',
+  type: 'sakura' | 'snow' | 'hearts',
   getSize: () => { w: number; h: number },
   reduced: boolean,
 ) {
-  const targetCount = type === 'sakura' ? 28 : 90;
-  const make = type === 'sakura' ? makeSakura : makeSnow;
+  const targetCount = type === 'sakura' ? 28 : type === 'hearts' ? 22 : 90;
+  const make = type === 'sakura' ? makeSakura : type === 'hearts' ? makeHeart : makeSnow;
+  const rising = type === 'hearts';
   let particles: Particle[] = [];
   let primed = false;
 
-  const paint = (t: number) => {
+  const paint = () => {
     const { w, h } = getSize();
     while (particles.length < targetCount) particles.push(make(w, h, primed));
     if (particles.length > targetCount) particles.length = targetCount;
@@ -111,12 +154,13 @@ function runParticleEffect(
     ctx.clearRect(0, 0, w, h);
     for (const p of particles) {
       if (type === 'sakura') drawPetal(ctx, p, Math.random() < 0.001 ? '#f28ab2' : '#f0a8c4');
+      else if (type === 'hearts') drawHeart(ctx, p, Math.random() < 0.5 ? '#c77fe8' : '#ff9fc9');
       else drawFlake(ctx, p);
     }
   };
 
   if (reduced) {
-    paint(0);
+    paint();
     return () => {};
   }
 
@@ -126,94 +170,56 @@ function runParticleEffect(
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
     const t = now / 1000;
-    const { w, h } = getSize();
+    const { h } = getSize();
     for (const p of particles) {
-      p.y += p.speed * dt * p.drift;
+      p.y += (rising ? -p.speed : p.speed) * dt * p.drift;
       p.x += Math.sin(t * 0.8 + p.phase) * p.sway * dt;
       p.rot += p.vr * dt;
     }
-    particles = particles.filter((p) => p.y < h + 30);
-    paint(t);
+    particles = rising ? particles.filter((p) => p.y > -30) : particles.filter((p) => p.y < h + 30);
+    paint();
     raf = requestAnimationFrame(tick);
   };
   raf = requestAnimationFrame(tick);
   return () => cancelAnimationFrame(raf);
 }
 
-function runCyberEffect(
+function runLeavesEffect(
   ctx: CanvasRenderingContext2D,
   getSize: () => { w: number; h: number },
   reduced: boolean,
 ) {
   const { w: w0, h: h0 } = getSize();
-  const count = Math.round(Math.min(70, Math.max(30, (w0 * h0) / 22000)));
-  const nodes: Node[] = Array.from({ length: count }).map(() => makeNode(w0, h0));
-  const linkDist = 130;
+  const count = Math.round(Math.min(22, Math.max(10, (w0 * h0) / 32000)));
+  const leaves: LeafShadow[] = Array.from({ length: count }).map(() => makeLeafShadow(w0, h0));
 
-  const paint = () => {
+  const paint = (t: number) => {
     const { w, h } = getSize();
     ctx.clearRect(0, 0, w, h);
-
-    // 노드 간 연결선 — 가까운 노드끼리 은은한 네온 선으로 연결
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const a = nodes[i];
-        const b = nodes[j];
-        const d = Math.hypot(a.x - b.x, a.y - b.y);
-        if (d < linkDist) {
-          const alpha = (1 - d / linkDist) * 0.5;
-          const color = a.hue === b.hue ? (a.hue === 'pink' ? CYBER_PINK : CYBER_CYAN) : '150, 150, 255';
-          ctx.strokeStyle = `rgba(${color}, ${alpha})`;
-          ctx.lineWidth = 0.8;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
-      }
+    ctx.filter = 'blur(4px)';
+    for (const l of leaves) {
+      const rot = l.rot0 + Math.sin(t * l.swaySpeed + l.phase) * l.swayAmp;
+      drawLeafShadow(ctx, l, rot);
     }
-
-    // 노드 — 발광하는 점
-    for (const n of nodes) {
-      const color = n.hue === 'pink' ? CYBER_PINK : CYBER_CYAN;
-      ctx.save();
-      ctx.shadowBlur = 8;
-      ctx.shadowColor = `rgba(${color}, 0.9)`;
-      ctx.fillStyle = `rgba(${color}, 0.95)`;
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
-    }
+    ctx.filter = 'none';
   };
 
   if (reduced) {
-    paint();
+    paint(0);
     return () => {};
   }
 
   let raf = 0;
-  let last = performance.now();
+  const start = performance.now();
   const tick = (now: number) => {
-    const dt = Math.min(0.05, (now - last) / 1000);
-    last = now;
-    const { w, h } = getSize();
-    for (const n of nodes) {
-      n.x += n.vx * dt;
-      n.y += n.vy * dt;
-      if (n.x < 0 || n.x > w) n.vx *= -1;
-      if (n.y < 0 || n.y > h) n.vy *= -1;
-      n.x = Math.max(0, Math.min(w, n.x));
-      n.y = Math.max(0, Math.min(h, n.y));
-    }
-    paint();
+    paint((now - start) / 1000);
     raf = requestAnimationFrame(tick);
   };
   raf = requestAnimationFrame(tick);
   return () => cancelAnimationFrame(raf);
 }
 
-/** 벚꽃/눈/홀로그램 배경 효과 — 선택한 테마에 따라 전체 화면에 떠다니는 파티클을 그린다 */
+/** 테마별 배경 효과 — 선택한 테마에 따라 전체 화면에 떠다니는 파티클/그림자를 그린다 */
 export default function ThemeEffect({ type }: { type: EffectType }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -240,8 +246,8 @@ export default function ThemeEffect({ type }: { type: EffectType }) {
 
     const getSize = () => ({ w, h });
     const stop =
-      type === 'cyber'
-        ? runCyberEffect(ctx, getSize, prefersReducedMotion)
+      type === 'leaves'
+        ? runLeavesEffect(ctx, getSize, prefersReducedMotion)
         : runParticleEffect(ctx, type, getSize, prefersReducedMotion);
 
     return () => {
@@ -251,5 +257,5 @@ export default function ThemeEffect({ type }: { type: EffectType }) {
   }, [type]);
 
   if (type === 'none') return null;
-  return <canvas ref={canvasRef} className={`theme-effect-canvas ${type === 'cyber' ? 'theme-effect-cyber' : ''}`} aria-hidden="true" />;
+  return <canvas ref={canvasRef} className="theme-effect-canvas" aria-hidden="true" />;
 }

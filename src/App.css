@@ -126,11 +126,6 @@ body {
   z-index: 5;
 }
 
-.theme-effect-cyber {
-  mix-blend-mode: screen;
-  opacity: 0.85;
-}
-
 /* ---------- settings popover ---------- */
 .settings-panel {
   position: relative;

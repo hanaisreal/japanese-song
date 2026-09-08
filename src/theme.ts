@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export type EffectType = 'none' | 'sakura' | 'snow' | 'cyber';
+export type EffectType = 'none' | 'sakura' | 'snow' | 'hearts' | 'leaves';
 
 export interface Theme {
   id: string;
@@ -48,7 +48,7 @@ export const THEMES: Theme[] = [
     id: 'red-lime',
     name: '레드 & 연두',
     emoji: '🍋',
-    effect: 'none',
+    effect: 'leaves',
     colors: {
       bg: '#fffaf3',
       bgPanel: '#e9f7c5',
@@ -105,23 +105,23 @@ export const THEMES: Theme[] = [
     },
   },
   {
-    id: 'cyber',
-    name: '홀로그램',
-    emoji: '🔷',
-    effect: 'cyber',
+    id: 'candy',
+    name: '라벤더 캔디',
+    emoji: '💜',
+    effect: 'hearts',
     colors: {
-      bg: '#05060f',
-      bgPanel: '#0a0c1c',
-      bgCard: '#0f1226',
-      bgCardOpen: '#151933',
-      border: '#2a2f5c',
-      borderSoft: '#1c2044',
-      text: '#eaf2ff',
-      textDim: '#7d8bc4',
-      burgundy: '#ff3ec8',
-      burgundySoft: 'rgba(255, 62, 200, 0.14)',
-      green: '#2ee6e6',
-      greenSoft: 'rgba(46, 230, 230, 0.14)',
+      bg: '#faf6ff',
+      bgPanel: '#f1e8ff',
+      bgCard: '#fdfbff',
+      bgCardOpen: '#ffffff',
+      border: '#e0cffa',
+      borderSoft: '#ede0fc',
+      text: '#3a2e4d',
+      textDim: '#9a89b5',
+      burgundy: '#b45cd6',
+      burgundySoft: 'rgba(180, 92, 214, 0.12)',
+      green: '#ff7fb4',
+      greenSoft: 'rgba(255, 127, 180, 0.14)',
     },
   },
 ];

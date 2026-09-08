@@ -13,6 +13,15 @@ interface Particle {
   drift: number;
 }
 
+interface Node {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  r: number;
+  hue: 'pink' | 'cyan';
+}
+
 function rand(min: number, max: number) {
   return min + Math.random() * (max - min);
 }
@@ -46,6 +55,17 @@ function makeSnow(w: number, h: number, atTop: boolean): Particle {
   };
 }
 
+function makeNode(w: number, h: number): Node {
+  return {
+    x: rand(0, w),
+    y: rand(0, h),
+    vx: rand(-10, 10),
+    vy: rand(-10, 10),
+    r: rand(1.4, 3),
+    hue: Math.random() < 0.5 ? 'pink' : 'cyan',
+  };
+}
+
 function drawPetal(ctx: CanvasRenderingContext2D, p: Particle, color: string) {
   ctx.save();
   ctx.translate(p.x, p.y);
@@ -69,7 +89,131 @@ function drawFlake(ctx: CanvasRenderingContext2D, p: Particle) {
   ctx.fill();
 }
 
-/** 벚꽃/눈 배경 효과 — 선택한 테마에 따라 전체 화면에 떠다니는 파티클을 그린다 */
+const CYBER_PINK = '255, 62, 200';
+const CYBER_CYAN = '46, 230, 230';
+
+function runParticleEffect(
+  ctx: CanvasRenderingContext2D,
+  type: 'sakura' | 'snow',
+  getSize: () => { w: number; h: number },
+  reduced: boolean,
+) {
+  const targetCount = type === 'sakura' ? 28 : 90;
+  const make = type === 'sakura' ? makeSakura : makeSnow;
+  let particles: Particle[] = [];
+  let primed = false;
+
+  const paint = (t: number) => {
+    const { w, h } = getSize();
+    while (particles.length < targetCount) particles.push(make(w, h, primed));
+    if (particles.length > targetCount) particles.length = targetCount;
+    primed = true;
+    ctx.clearRect(0, 0, w, h);
+    for (const p of particles) {
+      if (type === 'sakura') drawPetal(ctx, p, Math.random() < 0.001 ? '#f28ab2' : '#f0a8c4');
+      else drawFlake(ctx, p);
+    }
+  };
+
+  if (reduced) {
+    paint(0);
+    return () => {};
+  }
+
+  let raf = 0;
+  let last = performance.now();
+  const tick = (now: number) => {
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    const t = now / 1000;
+    const { w, h } = getSize();
+    for (const p of particles) {
+      p.y += p.speed * dt * p.drift;
+      p.x += Math.sin(t * 0.8 + p.phase) * p.sway * dt;
+      p.rot += p.vr * dt;
+    }
+    particles = particles.filter((p) => p.y < h + 30);
+    paint(t);
+    raf = requestAnimationFrame(tick);
+  };
+  raf = requestAnimationFrame(tick);
+  return () => cancelAnimationFrame(raf);
+}
+
+function runCyberEffect(
+  ctx: CanvasRenderingContext2D,
+  getSize: () => { w: number; h: number },
+  reduced: boolean,
+) {
+  const { w: w0, h: h0 } = getSize();
+  const count = Math.round(Math.min(70, Math.max(30, (w0 * h0) / 22000)));
+  const nodes: Node[] = Array.from({ length: count }).map(() => makeNode(w0, h0));
+  const linkDist = 130;
+
+  const paint = () => {
+    const { w, h } = getSize();
+    ctx.clearRect(0, 0, w, h);
+
+    // 노드 간 연결선 — 가까운 노드끼리 은은한 네온 선으로 연결
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i];
+        const b = nodes[j];
+        const d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < linkDist) {
+          const alpha = (1 - d / linkDist) * 0.5;
+          const color = a.hue === b.hue ? (a.hue === 'pink' ? CYBER_PINK : CYBER_CYAN) : '150, 150, 255';
+          ctx.strokeStyle = `rgba(${color}, ${alpha})`;
+          ctx.lineWidth = 0.8;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // 노드 — 발광하는 점
+    for (const n of nodes) {
+      const color = n.hue === 'pink' ? CYBER_PINK : CYBER_CYAN;
+      ctx.save();
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = `rgba(${color}, 0.9)`;
+      ctx.fillStyle = `rgba(${color}, 0.95)`;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  };
+
+  if (reduced) {
+    paint();
+    return () => {};
+  }
+
+  let raf = 0;
+  let last = performance.now();
+  const tick = (now: number) => {
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    const { w, h } = getSize();
+    for (const n of nodes) {
+      n.x += n.vx * dt;
+      n.y += n.vy * dt;
+      if (n.x < 0 || n.x > w) n.vx *= -1;
+      if (n.y < 0 || n.y > h) n.vy *= -1;
+      n.x = Math.max(0, Math.min(w, n.x));
+      n.y = Math.max(0, Math.min(h, n.y));
+    }
+    paint();
+    raf = requestAnimationFrame(tick);
+  };
+  raf = requestAnimationFrame(tick);
+  return () => cancelAnimationFrame(raf);
+}
+
+/** 벚꽃/눈/홀로그램 배경 효과 — 선택한 테마에 따라 전체 화면에 떠다니는 파티클을 그린다 */
 export default function ThemeEffect({ type }: { type: EffectType }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -81,15 +225,8 @@ export default function ThemeEffect({ type }: { type: EffectType }) {
     if (!ctx) return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let particles: Particle[] = [];
     let w = 0;
     let h = 0;
-    let raf = 0;
-    let last = performance.now();
-    let primed = false;
-
-    const targetCount = type === 'sakura' ? 28 : 90;
-    const make = type === 'sakura' ? makeSakura : makeSnow;
 
     const resize = () => {
       w = canvas.clientWidth;
@@ -101,46 +238,18 @@ export default function ThemeEffect({ type }: { type: EffectType }) {
     resize();
     window.addEventListener('resize', resize);
 
-    const tick = (now: number) => {
-      const dt = Math.min(0.05, (now - last) / 1000);
-      last = now;
-      const t = now / 1000;
-
-      while (particles.length < targetCount) particles.push(make(w, h, primed));
-      if (particles.length > targetCount) particles.length = targetCount;
-      primed = true;
-
-      ctx.clearRect(0, 0, w, h);
-      for (const p of particles) {
-        p.y += p.speed * dt * p.drift;
-        p.x += Math.sin(t * 0.8 + p.phase) * p.sway * dt;
-        p.rot += p.vr * dt;
-        if (type === 'sakura') drawPetal(ctx, p, Math.random() < 0.001 ? '#f28ab2' : '#f0a8c4');
-        else drawFlake(ctx, p);
-      }
-      particles = particles.filter((p) => p.y < h + 30);
-
-      raf = requestAnimationFrame(tick);
-    };
-
-    if (!prefersReducedMotion) {
-      raf = requestAnimationFrame(tick);
-    } else {
-      // 모션 최소화 설정: 정적인 한 프레임만 그려둔다
-      while (particles.length < targetCount) particles.push(make(w, h, false));
-      ctx.clearRect(0, 0, w, h);
-      for (const p of particles) {
-        if (type === 'sakura') drawPetal(ctx, p, '#f0a8c4');
-        else drawFlake(ctx, p);
-      }
-    }
+    const getSize = () => ({ w, h });
+    const stop =
+      type === 'cyber'
+        ? runCyberEffect(ctx, getSize, prefersReducedMotion)
+        : runParticleEffect(ctx, type, getSize, prefersReducedMotion);
 
     return () => {
-      cancelAnimationFrame(raf);
+      stop();
       window.removeEventListener('resize', resize);
     };
   }, [type]);
 
   if (type === 'none') return null;
-  return <canvas ref={canvasRef} className="theme-effect-canvas" aria-hidden="true" />;
+  return <canvas ref={canvasRef} className={`theme-effect-canvas ${type === 'cyber' ? 'theme-effect-cyber' : ''}`} aria-hidden="true" />;
 }

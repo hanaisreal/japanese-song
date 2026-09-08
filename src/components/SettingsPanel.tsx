@@ -67,12 +67,14 @@ export default function SettingsPanel() {
               <button
                 key={t.id}
                 className={`theme-swatch ${themeId === t.id ? 'active' : ''}`}
-                style={{ background: t.colors.bg, borderColor: t.colors.burgundy }}
                 onClick={() => setThemeId(t.id)}
                 title={t.name}
               >
-                <span>{t.emoji}</span>
-                <small style={{ color: t.colors.text }}>{t.name}</small>
+                <span className="theme-swatch-dots">
+                  <span style={{ background: t.colors.burgundy }} />
+                  <span style={{ background: t.colors.green }} />
+                </span>
+                <small>{t.name}</small>
               </button>
             ))}
           </div>

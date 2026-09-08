@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export type EffectType = 'none' | 'sakura' | 'snow';
+export type EffectType = 'none' | 'sakura' | 'snow' | 'cyber';
 
 export interface Theme {
   id: string;
@@ -102,6 +102,26 @@ export const THEMES: Theme[] = [
       burgundySoft: 'rgba(142, 197, 255, 0.14)',
       green: '#2f9e8c',
       greenSoft: 'rgba(47, 158, 140, 0.16)',
+    },
+  },
+  {
+    id: 'cyber',
+    name: '홀로그램',
+    emoji: '🔷',
+    effect: 'cyber',
+    colors: {
+      bg: '#05060f',
+      bgPanel: '#0a0c1c',
+      bgCard: '#0f1226',
+      bgCardOpen: '#151933',
+      border: '#2a2f5c',
+      borderSoft: '#1c2044',
+      text: '#eaf2ff',
+      textDim: '#7d8bc4',
+      burgundy: '#ff3ec8',
+      burgundySoft: 'rgba(255, 62, 200, 0.14)',
+      green: '#2ee6e6',
+      greenSoft: 'rgba(46, 230, 230, 0.14)',
     },
   },
 ];
